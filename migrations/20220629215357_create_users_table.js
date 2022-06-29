@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
  exports.up = function (knex) {
-    return knex.schema.createTable('user', (table) => {
+    return knex.schema.createTable('users', (table) => {
       table.increments('id').primary();
       table.text('name').notNullable();
       table.text('bio').notNullable();
@@ -12,7 +12,7 @@
   
       .createTable('pokemon', (table) => {
         table.increments('id').primary();
-        table.integer('user_id').references('id').inTable('user');
+        table.integer('user_id').references('id').inTable('users');
         table.text('name').notNullable();
         table.integer('hp').notNullable();
         table.text('front');
@@ -25,6 +25,6 @@
    * @returns { Promise<void> }
    */
   exports.down = function (knex) {
-    return knex.schema.dropTable('user').dropTable('pokemon');
+    return knex.schema.dropTable('users').dropTable('pokemon');
   };
   
